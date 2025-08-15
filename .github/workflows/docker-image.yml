@@ -7,20 +7,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Checkout with LFS enabled so large model files are pulled
       - uses: actions/checkout@v4
-        with:
-          lfs: true
 
-      # Build the Docker image
       - name: Build Docker image
         run: docker build -t my-image:latest .
 
-      # Save image to tar.gz
       - name: Save image to tar.gz
         run: docker save my-image:latest | gzip > my-image.tar.gz
 
-      # Upload the tar.gz as artifact
       - name: Upload image artifact
         uses: actions/upload-artifact@v4
         with:
